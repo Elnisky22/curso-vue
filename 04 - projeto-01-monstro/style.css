@@ -1,3 +1,4 @@
+/*--------------------------------------------------GENENRAL---------------------------------------------*/
 html {
     font-family: 'Montserrat', sans-serif;
 }
@@ -11,4 +12,115 @@ html {
     margin: 10px;
     padding: 20px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
+}
+
+/*--------------------------------------------------SCORES---------------------------------------------*/
+.scores {
+    display: flex;
+}
+.score {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.score h2 {
+    font-size: 24px;
+    font-weight: 600;
+}
+.score .life-bar {
+    border: 1px solid black;
+    height: 20px;
+    width: 80%;
+}
+.score .life-bar .life {
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+.score .life-bar .life.danger {
+    background-color: red;
+}
+
+/*--------------------------------------------------RESULT---------------------------------------------*/
+.result {
+    display: flex;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: 600;
+}
+.result .win {
+    color: green;
+}
+.result .lose {
+    color: red;
+}
+
+/*--------------------------------------------------CONTROLS--------------------------------------------*/
+.controls {
+    display: flex;
+    justify-content: center;
+}
+.controls .btn {
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 5px 10px;
+    margin: 0 10px;
+    text-transform: uppercase;
+    opacity: .7;
+    transition: opacity 0.4s ease;
+}
+.controls .btn:hover {
+    opacity: 1;
+}
+.controls .btn.atk {
+    background-color: red;
+    color: #fff;
+}
+.controls .btn.s-atk {
+    background-color: orange;
+}
+.controls .btn.heal {
+    background-color: green;
+    color: #fff;
+}
+.controls .btn.give {
+    background-color: gray;
+    color: #fff;
+}
+.controls .btn.start {
+    background-color: lightblue;
+    color: #000;
+}
+
+/*--------------------------------------------------LOGS--------------------------------------------*/
+.logs ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.logs ul li {
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    margin: 4px 0;
+    padding: 3px 0;
+    font-weight: 600;
+    font-size: 18px;
+}
+.logs ul li.player {
+    background-color: #4253af;
+}
+.logs ul li.monster {
+    background-color: #e51c23;
+}
+.logs ul li.heal {
+    background-color: #1ec94c;
 }

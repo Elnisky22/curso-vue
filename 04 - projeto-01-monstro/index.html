@@ -11,10 +11,45 @@
 
     <body>
         <div id="app">
-            <div class="panel scores"></div>
-            <div class="panel result"></div>
-            <div class="panel controls"></div>
-            <div class="panel logs"></div>
+            <section class="panel scores">
+                <div class="score">
+                    <h2>Jogador</h2>
+                    <div class="life-bar">
+                        <div class="life" :class="{danger: playerLife < 26}" :style="{width: playerLife + '%'}"></div>
+                    </div>
+                    <span>{{ playerLife }}%</span>
+                </div>
+                <div class="score">
+                    <h2>Monstro</h2>
+                    <div class="life-bar">
+                        <div class="life" :class="{danger: monsterLife < 26}" :style="{width: monsterLife + '%'}"></div>
+                    </div>
+                    <span>{{ monsterLife }}%</span>
+                </div>
+            </section>
+
+            <section v-show="hasResult" class="panel result">
+                <h2 v-if="monsterLife == 0" class="win">Você ganhou!</h2>
+                <h2 v-else class="lose">Você perdeu!</h2>
+            </section>
+
+            <section class="panel controls">
+                <template v-if="running">
+                    <button class="btn atk" @click="attack(false)">Ataque</button>
+                    <button class="btn s-atk" @click="attack(true)">Ataque Especial</button>
+                    <button class="btn heal" @click="heal(10, 15)">Curar</button>
+                    <button class="btn give" @click="running = false">Desistir</button>
+                </template>
+                <button v-else class="btn start" @click="startGame">Iniciar Jogo</button>
+            </section>
+
+            <section v-show="logs.length" class="panel logs">
+                <ul class="log">
+                    <li v-for="log in logs" :class="log.cls">
+                        {{ log.text }}
+                    </li>
+                </ul>
+            </section>
         </div>
 
         <script src="app.js"></script>
