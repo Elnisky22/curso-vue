@@ -2,7 +2,7 @@
 	<div id="app">
 		<h1>Formulário Desafio</h1>
 		<div class="conteudo">
-			<form class="painel">
+			<form class="painel" v-if="!sended">
 				<div class="cabecalho">Formulário</div>
 				<!-- Exercicio 01 -->
 				<!-- Criar uma formulário de registro -->
@@ -11,13 +11,24 @@
 				<!-- Senha -->
 				<!-- Armazenar Dados? (Sim/Não) -->
 
-				<label for="nome">Nome</label>
-				<input type="text" id="nome" v-model="nome"/>
-				<input type="text" id="sobrenome" v-model="sobrenome"/>
+				<Rotulo :nome="'Nome Completo'">
+					<input type="text" v-model="nome"/>
+					<input type="text" v-model="sobrenome"/>
+				</Rotulo>
 
-				<br>
-				<label for="email">E-mail</label>
-				<input type="email" id="email" v-model="email">
+				<Rotulo :nome="'E-mail'">
+					<input type="email" v-model="email"/>
+				</Rotulo>
+
+				<Rotulo :nome="'Senha'">
+					<input type="password" v-model="senha"/>
+				</Rotulo>
+
+				<Rotulo :nome="'Armazenar Dados'">
+					<input type="checkbox" v-model="salvar" value="true"> Sim
+				</Rotulo>
+
+				<button type="submit" @click.prevent="sendForm">Enviar</button>
 
 				<!-- Exercicio 02 -->
 				<!-- Só mostrar o fomulário de não tiver sido submetido -->
@@ -27,10 +38,12 @@
 				<!-- Crie um componente personalizado NomeCompleto -->
 				<!-- Esse componente deve receber Nome e Sobrenome -->
 			</form>
-			<div class="painel">
+			<div class="painel" v-else>
 				<div class="cabecalho">Resultado</div>
-				<span>Nome Completo:<br> {{ nome }} {{ sobrenome }}</span>
-				<span>E-mail: {{ email }}</span>
+				<span>Nome Completo: {{ nome }} {{ sobrenome }}</span><br><br>
+				<span>E-mail: {{ email }}</span><br><br>
+				<span>Senha: {{ senha }}</span><br><br>
+				<span>Armazenar: {{ salvar }}</span>
 			</div>
 		</div>
 	</div>
@@ -47,6 +60,14 @@ export default {
 			nome: '',
 			sobrenome: '',
 			email: '',
+			senha: '',
+			salvar: false,
+			sended: false
+		}
+	},
+	methods: {
+		sendForm() {
+			this.sended = true;
 		}
 	}
 }
