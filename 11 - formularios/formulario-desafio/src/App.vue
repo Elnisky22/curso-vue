@@ -11,10 +11,7 @@
 				<!-- Senha -->
 				<!-- Armazenar Dados? (Sim/Não) -->
 
-				<Rotulo :nome="'Nome Completo'">
-					<input type="text" v-model="nome"/>
-					<input type="text" v-model="sobrenome"/>
-				</Rotulo>
+				<NomeCompleto v-model="nomeCompleto"/>
 
 				<Rotulo :nome="'E-mail'">
 					<input type="email" v-model="email"/>
@@ -25,14 +22,15 @@
 				</Rotulo>
 
 				<Rotulo :nome="'Armazenar Dados'">
-					<input type="checkbox" v-model="salvar" value="true"> Sim
+					<input type="checkbox" v-model="salvar" value="true">
 				</Rotulo>
-
-				<button type="submit" @click.prevent="sendForm">Enviar</button>
 
 				<!-- Exercicio 02 -->
 				<!-- Só mostrar o fomulário de não tiver sido submetido -->
 				<!-- Mostrar a área de Resultado apenas quando o formulário for submetido -->
+
+				<hr>
+				<button type="submit" @click.prevent="sendForm">Enviar</button>
 				
 				<!-- Exercicio 03 -->
 				<!-- Crie um componente personalizado NomeCompleto -->
@@ -40,37 +38,51 @@
 			</form>
 			<div class="painel" v-else>
 				<div class="cabecalho">Resultado</div>
-				<span>Nome Completo: {{ nome }} {{ sobrenome }}</span><br><br>
-				<span>E-mail: {{ email }}</span><br><br>
-				<span>Senha: {{ senha }}</span><br><br>
-				<span>Armazenar: {{ salvar }}</span>
+				<Rotulo :nome="'Nome'">
+					<span>{{ nomeCompleto.nome }}</span>
+				</Rotulo>
+				<Rotulo :nome="'Sobrenome'">
+					<span>{{ nomeCompleto.sobrenome }}</span>
+				</Rotulo>
+				<Rotulo :nome="'Email'">
+					<span>{{ email }}</span>
+				</Rotulo>
+				<Rotulo :nome="'Senha'">
+					<span>{{ senha }}</span>
+				</Rotulo>
+				<Rotulo :nome="'Armazenar Dados?'">
+					<span>{{ salvar }}</span>
+				</Rotulo>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-import Rotulo from './components/Rotulo.vue'
+	import Rotulo from './components/Rotulo.vue'
+	import NomeCompleto from './components/NomeCompleto.vue'
 
-export default {
-	name: 'app',
-	components: { Rotulo },
-	data() {
-		return {
-			nome: '',
-			sobrenome: '',
-			email: '',
-			senha: '',
-			salvar: false,
-			sended: false
-		}
-	},
-	methods: {
-		sendForm() {
-			this.sended = true;
+	export default {
+		name: 'app',
+		components: { Rotulo, NomeCompleto },
+		data() {
+			return {
+				nomeCompleto: {
+					nome: '',
+					sobrenome: '',
+				},
+				email: '',
+				senha: '',
+				salvar: true,
+				sended: false
+			}
+		},
+		methods: {
+			sendForm() {
+				this.sended = true;
+			}
 		}
 	}
-}
 </script>
 
 <style>
@@ -116,6 +128,7 @@ body {
 	margin: 10px 0px;
 	padding: 10px 20px;
 	font-size: 1.4rem;
+	border: none;
 	border-radius: 5px;
 	color: #FFF;
 	background-color: #2196F3;
